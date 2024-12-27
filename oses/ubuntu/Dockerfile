@@ -10,7 +10,7 @@ ENV         DEBIAN_FRONTEND=noninteractive
 ## Add container user
 RUN         useradd -m -d /home/container -s /bin/bash container
 ENV         USER=container HOME=/home/container
-RUN         dpkg --add-architecture i386 && apt update && apt install wine32:i386
+RUN         dpkg --add-architecture i386 && apt update -y && apt install wine32:i386 -y
 ## Install dependencies
 RUN         apt install -y gcc g++ libgcc1 libc++-dev gdb libc6 git wget curl tar zip unzip binutils xz-utils liblzo2-2 cabextract iproute2 net-tools netcat-openbsd telnet libatomic1 libsdl1.2debian libsdl2-2.0-0 \
                 libfontconfig icu-devtools libunwind8 sqlite3 libsqlite3-dev libzip4 locales ffmpeg apt-transport-https init-system-helpers \
