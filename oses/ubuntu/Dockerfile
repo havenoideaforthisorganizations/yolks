@@ -10,9 +10,10 @@ ENV         DEBIAN_FRONTEND=noninteractive
 ## Add container user
 RUN         useradd -m -d /home/container -s /bin/bash container
 ENV         USER=container HOME=/home/container
-RUN         dpkg --add-architecture i386
-RUN         apt-get update -y
-RUN         apt-get upgrade -y
+RUN         dpkg --add-architecture i386 && \
+            sed -i 's/ports.ubuntu.com/archive.ubuntu.com/g' /etc/apt/sources.list && \
+            apt-get update -y && \
+            apt-get upgrade -y
 ## Install dependencies
 RUN         apt install -y gcc g++ libgcc1 libc++-dev gdb libc6 git wget curl tar zip unzip binutils xz-utils liblzo2-2 cabextract iproute2 net-tools netcat-openbsd telnet libatomic1 libsdl1.2debian libsdl2-2.0-0 \
                 libfontconfig icu-devtools libunwind8 sqlite3 libsqlite3-dev libzip4 locales ffmpeg apt-transport-https init-system-helpers \
